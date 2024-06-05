@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B80E94282C104629000D6645 /* CustomVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80E94272C104629000D6645 /* CustomVC.swift */; };
+		B80E942A2C104653000D6645 /* MiniPosterUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80E94292C104653000D6645 /* MiniPosterUIView.swift */; };
+		B80E942C2C10468A000D6645 /* SignUpTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80E942B2C10468A000D6645 /* SignUpTextField.swift */; };
 		B8ECD7202C0EF60200FED45E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8ECD71F2C0EF60200FED45E /* AppDelegate.swift */; };
 		B8ECD7222C0EF60200FED45E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8ECD7212C0EF60200FED45E /* SceneDelegate.swift */; };
 		B8ECD7272C0EF60200FED45E /* Base in Resources */ = {isa = PBXBuildFile; fileRef = B8ECD7262C0EF60200FED45E /* Base */; };
@@ -15,12 +18,14 @@
 		B8ECD7342C0EFA6A00FED45E /* MediaMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8ECD7332C0EFA6A00FED45E /* MediaMainViewController.swift */; };
 		B8ECD7392C0EFABB00FED45E /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = B8ECD7382C0EFABB00FED45E /* SnapKit */; };
 		B8ECD73C2C0EFAC500FED45E /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = B8ECD73B2C0EFAC500FED45E /* Alamofire */; };
-		B8ECD73F2C0EFB0900FED45E /* MediaUIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8ECD73E2C0EFB0900FED45E /* MediaUIManager.swift */; };
 		B8ECD7412C0F163000FED45E /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8ECD7402C0F163000FED45E /* SignUpViewController.swift */; };
 		B8ECD7442C0F1B1D00FED45E /* Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8ECD7432C0F1B1D00FED45E /* Localized.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B80E94272C104629000D6645 /* CustomVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomVC.swift; sourceTree = "<group>"; };
+		B80E94292C104653000D6645 /* MiniPosterUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniPosterUIView.swift; sourceTree = "<group>"; };
+		B80E942B2C10468A000D6645 /* SignUpTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTextField.swift; sourceTree = "<group>"; };
 		B8ECD71C2C0EF60200FED45E /* MediaApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MediaApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8ECD71F2C0EF60200FED45E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B8ECD7212C0EF60200FED45E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -29,7 +34,6 @@
 		B8ECD72B2C0EF60400FED45E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B8ECD72D2C0EF60400FED45E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B8ECD7332C0EFA6A00FED45E /* MediaMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaMainViewController.swift; sourceTree = "<group>"; };
-		B8ECD73E2C0EFB0900FED45E /* MediaUIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaUIManager.swift; sourceTree = "<group>"; };
 		B8ECD7402C0F163000FED45E /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		B8ECD7432C0F1B1D00FED45E /* Localized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localized.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -47,6 +51,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B80E94262C1045CB000D6645 /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				B80E94272C104629000D6645 /* CustomVC.swift */,
+				B80E94292C104653000D6645 /* MiniPosterUIView.swift */,
+				B80E942B2C10468A000D6645 /* SignUpTextField.swift */,
+			);
+			path = Custom;
+			sourceTree = "<group>";
+		};
 		B8ECD7132C0EF60200FED45E = {
 			isa = PBXGroup;
 			children = (
@@ -66,8 +80,8 @@
 		B8ECD71E2C0EF60200FED45E /* MediaApp */ = {
 			isa = PBXGroup;
 			children = (
+				B80E94262C1045CB000D6645 /* Custom */,
 				B8ECD7422C0F1B1300FED45E /* Utils */,
-				B8ECD73D2C0EFAED00FED45E /* Manager */,
 				B8ECD7362C0EFA7F00FED45E /* App */,
 				B8ECD7282C0EF60400FED45E /* Assets.xcassets */,
 				B8ECD72A2C0EF60400FED45E /* LaunchScreen.storyboard */,
@@ -94,14 +108,6 @@
 				B8ECD7212C0EF60200FED45E /* SceneDelegate.swift */,
 			);
 			path = App;
-			sourceTree = "<group>";
-		};
-		B8ECD73D2C0EFAED00FED45E /* Manager */ = {
-			isa = PBXGroup;
-			children = (
-				B8ECD73E2C0EFB0900FED45E /* MediaUIManager.swift */,
-			);
-			path = Manager;
 			sourceTree = "<group>";
 		};
 		B8ECD7422C0F1B1300FED45E /* Utils */ = {
@@ -191,12 +197,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B8ECD73F2C0EFB0900FED45E /* MediaUIManager.swift in Sources */,
 				B8ECD7442C0F1B1D00FED45E /* Localized.swift in Sources */,
 				B8ECD7342C0EFA6A00FED45E /* MediaMainViewController.swift in Sources */,
 				B8ECD7202C0EF60200FED45E /* AppDelegate.swift in Sources */,
+				B80E942A2C104653000D6645 /* MiniPosterUIView.swift in Sources */,
+				B80E94282C104629000D6645 /* CustomVC.swift in Sources */,
 				B8ECD7222C0EF60200FED45E /* SceneDelegate.swift in Sources */,
 				B8ECD7412C0F163000FED45E /* SignUpViewController.swift in Sources */,
+				B80E942C2C10468A000D6645 /* SignUpTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

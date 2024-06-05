@@ -199,17 +199,3 @@ class MediaMainViewController: MediaViewController {
         }
     }
 }
-
-class CurrentHotContentsImageView: UIImageView {
-    
-    override init(image: UIImage? = nil) {
-        super.init(image: image)
-        self.clipsToBounds = true
-        self.layer.cornerRadius = 4
-        self.contentMode = .scaleAspectFill
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}
