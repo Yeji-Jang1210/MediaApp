@@ -116,11 +116,11 @@
             </objects>
             <point key="canvasLocation" x="971.7557251908396" y="753.52112676056345"/>
         </scene>
-        <!--Item-->
+        <!--Hot-->
         <scene sceneID="4Vw-Qu-be1">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="TCj-8l-fqu" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="qVH-7D-RGb"/>
+                    <tabBarItem key="tabBarItem" title="Hot" image="star.fill" catalog="system" id="qVH-7D-RGb"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="8Ht-Vf-67Y">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
@@ -139,6 +139,7 @@
     <resources>
         <image name="person" catalog="system" width="128" height="121"/>
         <image name="popcorn" catalog="system" width="103" height="128"/>
+        <image name="star.fill" catalog="system" width="128" height="116"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

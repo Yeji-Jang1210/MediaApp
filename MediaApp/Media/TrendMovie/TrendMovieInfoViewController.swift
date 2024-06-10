@@ -46,7 +46,6 @@ class TrendMovieInfoViewController: MediaViewController {
     }
     
     func configureUI(){
-        tabBarController?.tabBarItem = UITabBarItem(title: "Hot", image: UIImage(systemName: "star"), selectedImage: UIImage(systemName: "star.fill"))
         configureTableView()
     }
     
