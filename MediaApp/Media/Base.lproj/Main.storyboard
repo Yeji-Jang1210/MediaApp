@@ -8,6 +8,22 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Media Search View Controller-->
+        <scene sceneID="Xcc-28-FGY">
+            <objects>
+                <viewController storyboardIdentifier="MediaSearchViewController" id="xDt-D3-Giy" customClass="MediaSearchViewController" customModule="MediaApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="N4b-Aj-xv0">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="jkC-mf-MFU"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="ijg-hY-O8x"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ee9-fb-y5f" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1898" y="-1429"/>
+        </scene>
         <!--Trend Movie Info View Controller-->
         <scene sceneID="az2-Px-6uL">
             <objects>
@@ -91,6 +107,7 @@
                         <segue destination="3HV-kz-Zng" kind="relationship" relationship="viewControllers" id="4u6-R4-MGU"/>
                         <segue destination="Gzg-lw-tZ6" kind="relationship" relationship="viewControllers" id="SEG-LY-DXA"/>
                         <segue destination="TCj-8l-fqu" kind="relationship" relationship="viewControllers" id="bag-cu-nNr"/>
+                        <segue destination="TYw-lF-xY8" kind="relationship" relationship="viewControllers" id="rkB-6N-NZ7"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lgp-u2-cAF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -134,6 +151,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XXP-q3-WvH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="973" y="-700"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="wgp-lm-z5w">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="TYw-lF-xY8" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="D3d-FG-QKw"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="HUR-qX-gaV">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="xDt-D3-Giy" kind="relationship" relationship="rootViewController" id="1BE-e2-X5T"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gYp-tz-eJH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="972" y="-1429"/>
         </scene>
     </scenes>
     <resources>

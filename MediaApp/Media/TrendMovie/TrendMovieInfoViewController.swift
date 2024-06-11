@@ -44,7 +44,7 @@ class TrendMovieInfoViewController: MediaViewController {
         configureLayout()
         configureUI()
         
-        GenreManager.fetchData()
+        GenreManager.fetchData(for: .movie)
         
         callTrendingMovieAPIResponse { movies in
             guard let movies else { return }
