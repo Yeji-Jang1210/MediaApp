@@ -37,7 +37,7 @@ class MediaInfoTableViewCell: UITableViewCell {
     
     let likedButton: UIButton = {
         let object = UIButton(type: .system)
-        object.setImage(UIImage(systemName: "paperclip.circle.fill"), for: .normal)
+        object.setBackgroundImage(UIImage(systemName: "paperclip.circle.fill"), for: .normal)
         object.tintColor = .white
         return object
     }()
@@ -153,7 +153,7 @@ class MediaInfoTableViewCell: UITableViewCell {
         
         categoryLabel.snp.makeConstraints { make in
             make.top.equalTo(dateLabel.snp.bottom).offset(4)
-            make.leading.equalTo(dateLabel)
+            make.horizontalEdges.equalTo(mediaInfoView.snp.horizontalEdges)
         }
         
         mediaInfoView.snp.makeConstraints { make in
@@ -171,7 +171,7 @@ class MediaInfoTableViewCell: UITableViewCell {
         
         likedButton.snp.makeConstraints { make in
             make.top.trailing.equalToSuperview().inset(12)
-            make.size.equalTo(24)
+            make.size.equalTo(30)
         }
         
         stackView.snp.makeConstraints { make in

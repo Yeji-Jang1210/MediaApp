@@ -15,8 +15,27 @@ class TrendMovieInfoViewController: MediaViewController {
         return object
     }()
     
+    let scrollTopButton: UIButton = {
+        let object = UIButton(type: .system)
+        object.setBackgroundImage(UIImage(systemName: "chevron.up.circle.fill"), for: .normal)
+        object.tintColor = .red
+        return object
+    }()
+    
+    let textField: UITextField = {
+        let object = UITextField()
+        object.textColor = .white
+        object.attributedPlaceholder = NSAttributedString(string: "영화 이름을 검색하세요.", attributes: [.foregroundColor : UIColor.systemGray2.cgColor])
+        return object
+    }()
+    
     //MARK: - properties
     var list: [Movie] = []
+    var filterList: [Movie] = [] {
+        didSet {
+            self.tableView.reloadData()
+        }
+    }
     
     //MARK: - life cycle
     override func viewDidLoad() {
@@ -30,30 +49,38 @@ class TrendMovieInfoViewController: MediaViewController {
         callTrendingMovieAPIResponse { movies in
             guard let movies else { return }
             self.list = movies
-            self.tableView.reloadData()
+            self.filterList = self.list
         }
     }
     
     //MARK: - configure function
     func configureHierarchy(){
         view.addSubview(tableView)
+        view.addSubview(scrollTopButton)
+        navigationItem.titleView = textField
     }
     
     func configureLayout(){
         tableView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
+        
+        scrollTopButton.snp.makeConstraints { make in
+            make.bottom.trailing.equalTo(view.safeAreaLayoutGuide).inset(20)
+            make.size.equalTo(40)
+        }
     }
     
     func configureUI(){
         configureTableView()
+        
+        scrollTopButton.addTarget(self, action: #selector(scrollTopButtonTapped), for: .touchUpInside)
     }
     
     override func configureNavigation() {
         super.configureNavigation()
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal"), style: .done, target: self, action: #selector(menuButtonClicked))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .done, target: self, action: #selector(searchButtonClicked))
-        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal"), style: .done, target: self, action: #selector(searchButtonClicked))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .done, target: self, action: #selector(menuButtonClicked))
         navigationController?.navigationBar.tintColor = .white
     }
     
@@ -64,11 +91,21 @@ class TrendMovieInfoViewController: MediaViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(MediaInfoTableViewCell.self, forCellReuseIdentifier: MediaInfoTableViewCell.identifier)
+        tableView.keyboardDismissMode = .onDrag
     }
     
     //MARK: - function
+    @objc func scrollTopButtonTapped(){
+        tableView.setContentOffset(.zero, animated: true)
+    }
+    
     @objc func menuButtonClicked(){
-        
+        if let text = textField.text {
+            guard !text.isEmpty else { return }
+            filterList = list.filter{ $0.original_title.lowercased().contains(text.lowercased()) }
+            view.endEditing(true)
+            tableView.reloadData()
+        }
     }
     
     @objc func searchButtonClicked(){
@@ -109,20 +146,21 @@ class TrendMovieInfoViewController: MediaViewController {
 
 extension TrendMovieInfoViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return list.count
+        return filterList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: MediaInfoTableViewCell.identifier, for: indexPath) as! MediaInfoTableViewCell
 
-        cell.setData(self.list[indexPath.row])
+        cell.setData(self.filterList[indexPath.row])
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = MovieDetailViewController()
-        vc.movie = list[indexPath.row]
+        vc.movie = filterList[indexPath.row]
         navigationController?.pushViewController(vc, animated: true)
     }
+    
 }
