@@ -20,13 +20,11 @@ class ExpandTextViewCell: UITableViewCell {
         return object
     }()
     
-    let textView: UITextView = {
-        let object = UITextView()
+    let overViewLabel: UILabel = {
+        let object = UILabel()
         object.backgroundColor = .clear
         object.font = .systemFont(ofSize: 14)
         object.textColor = .white
-        object.isScrollEnabled = false
-        object.isEditable = false
         return object
     }()
     
@@ -51,12 +49,11 @@ class ExpandTextViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     //MARK: - configure function
     func configureHierarchy(){
         contentView.addSubview(backView)
         
-        backView.addSubview(textView)
+        backView.addSubview(overViewLabel)
         backView.addSubview(button)
     }
     
@@ -65,24 +62,24 @@ class ExpandTextViewCell: UITableViewCell {
             make.edges.equalToSuperview()
         }
         
-        textView.snp.makeConstraints { make in
+        overViewLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(12)
             make.horizontalEdges.equalToSuperview().inset(12)
         }
         
         button.snp.makeConstraints { make in
-            make.top.equalTo(textView.snp.bottom).offset(12)
-            make.horizontalEdges.equalTo(textView.snp.horizontalEdges)
+            make.top.equalTo(overViewLabel.snp.bottom).offset(12)
+            make.horizontalEdges.equalTo(overViewLabel.snp.horizontalEdges)
             make.bottom.equalToSuperview().offset(-12)
+            make.height.equalTo(24)
         }
     }
     
     func configureUI(){
-        
     }
     
     //MARK: - function
     public func fetchData(_ text: String?){
-        textView.text = text
+        overViewLabel.text = text
     }
 }

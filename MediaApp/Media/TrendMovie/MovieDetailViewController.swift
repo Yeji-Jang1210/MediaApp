@@ -66,6 +66,11 @@ class MovieDetailViewController: MediaViewController {
     
     //MARK: - properties
     var movie: Movie?
+    var isExpanded: Bool = false {
+        didSet {
+            tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
+        }
+    }
 
     //MARK: - life cycle
     override func viewDidLoad() {
@@ -150,6 +155,7 @@ class MovieDetailViewController: MediaViewController {
     //MARK: - function
     @objc func expandTextView(){
         //20240611 expand textView 구현하기..
+        isExpanded.toggle()
     }
 }
 
@@ -191,6 +197,7 @@ extension MovieDetailViewController: UITableViewDelegate, UITableViewDataSource 
         case .overView:
             let cell = tableView.dequeueReusableCell(withIdentifier: ExpandTextViewCell.identifier) as! ExpandTextViewCell
             cell.fetchData(movie?.overview)
+            cell.overViewLabel.numberOfLines = isExpanded ? 0 : 2
             cell.button.addTarget(self, action: #selector(expandTextView), for: .touchUpInside)
             return cell
             
