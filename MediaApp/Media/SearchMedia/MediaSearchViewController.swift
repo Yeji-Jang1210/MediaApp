@@ -137,8 +137,8 @@ class MediaSearchViewController: MediaViewController {
     }
     
     func callAPI(text: String){
-        AF.request(MediaAPI.searchURL(text: text, page: self.page).url, method: .get, headers: APIService.headers).responseDecodable(of: SearchResult.self) { response in
-            switch response.result {
+        APIManager.callAPI(url: MediaAPI.searchURL(text: text, page: self.page).url, type: SearchResult.self) { result in
+            switch result {
             case .success(let value):
                 if self.page == 1 {
                     self.list = value
@@ -151,8 +151,7 @@ class MediaSearchViewController: MediaViewController {
                 if self.page == 1 && !value.results.isEmpty {
                     self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
                 }
-                
-            case .failure(let error):
+            case .error(let error):
                 print(error)
             }
         }
@@ -205,6 +204,13 @@ extension MediaSearchViewController: UICollectionViewDataSourcePrefetching {
                     callAPI(text: textField.text!)
                 }
             }
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let program = list?.results[indexPath.row] {
+            let vc = TVDetailViewController(id: program.id, title: program.original_name)
+            navigationController?.pushViewController(vc, animated: true)
         }
     }
 }

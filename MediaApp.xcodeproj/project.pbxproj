@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B806ADFA2C29505A00D8D540 /* TVDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B806ADF92C29505A00D8D540 /* TVDetailViewController.swift */; };
+		B806ADFC2C29508B00D8D540 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B806ADFB2C29508B00D8D540 /* APIManager.swift */; };
+		B806AE002C296BA800D8D540 /* PosterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B806ADFF2C296BA800D8D540 /* PosterCollectionViewCell.swift */; };
+		B806AE022C29705100D8D540 /* PosterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B806AE012C29705100D8D540 /* PosterTableViewCell.swift */; };
 		B80E94282C104629000D6645 /* CustomVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80E94272C104629000D6645 /* CustomVC.swift */; };
 		B80E942A2C104653000D6645 /* MiniPosterUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80E94292C104653000D6645 /* MiniPosterUIView.swift */; };
 		B80E942C2C10468A000D6645 /* SignUpTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80E942B2C10468A000D6645 /* SignUpTextField.swift */; };
@@ -37,6 +41,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B806ADF92C29505A00D8D540 /* TVDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVDetailViewController.swift; sourceTree = "<group>"; };
+		B806ADFB2C29508B00D8D540 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		B806ADFF2C296BA800D8D540 /* PosterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosterCollectionViewCell.swift; sourceTree = "<group>"; };
+		B806AE012C29705100D8D540 /* PosterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosterTableViewCell.swift; sourceTree = "<group>"; };
 		B80E94272C104629000D6645 /* CustomVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomVC.swift; sourceTree = "<group>"; };
 		B80E94292C104653000D6645 /* MiniPosterUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniPosterUIView.swift; sourceTree = "<group>"; };
 		B80E942B2C10468A000D6645 /* SignUpTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTextField.swift; sourceTree = "<group>"; };
@@ -94,6 +102,9 @@
 			children = (
 				B83069DA2C1837A400816BBE /* MediaSearchViewController.swift */,
 				B83069E12C18418100816BBE /* SearchCollectionViewCell.swift */,
+				B806ADF92C29505A00D8D540 /* TVDetailViewController.swift */,
+				B806ADFF2C296BA800D8D540 /* PosterCollectionViewCell.swift */,
+				B806AE012C29705100D8D540 /* PosterTableViewCell.swift */,
 			);
 			path = SearchMedia;
 			sourceTree = "<group>";
@@ -174,6 +185,7 @@
 			children = (
 				B8F852DD2C16E4B7000B2A51 /* APIKey.swift */,
 				B8F852EC2C175042000B2A51 /* MovieGenreManager.swift */,
+				B806ADFB2C29508B00D8D540 /* APIManager.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -288,19 +300,23 @@
 				B8F852E02C16E8AC000B2A51 /* Movie.swift in Sources */,
 				B8F852D62C16CEF0000B2A51 /* TrendMovieInfoViewController.swift in Sources */,
 				B8F852EB2C174CCB000B2A51 /* ExpandTextViewCell.swift in Sources */,
+				B806ADFC2C29508B00D8D540 /* APIManager.swift in Sources */,
 				B8F852E62C172697000B2A51 /* MovieDetailViewController.swift in Sources */,
 				B83069DD2C183B8400816BBE /* TVModel.swift in Sources */,
 				B83069DB2C1837A400816BBE /* MediaSearchViewController.swift in Sources */,
 				B8ECD7202C0EF60200FED45E /* AppDelegate.swift in Sources */,
+				B806AE002C296BA800D8D540 /* PosterCollectionViewCell.swift in Sources */,
 				B8F852D82C16D37E000B2A51 /* MediaInfoTableViewCell.swift in Sources */,
 				B8F852ED2C175042000B2A51 /* MovieGenreManager.swift in Sources */,
 				B80E942A2C104653000D6645 /* MiniPosterUIView.swift in Sources */,
 				B8F852DE2C16E4B7000B2A51 /* APIKey.swift in Sources */,
+				B806AE022C29705100D8D540 /* PosterTableViewCell.swift in Sources */,
 				B80E94282C104629000D6645 /* CustomVC.swift in Sources */,
 				B8ECD7222C0EF60200FED45E /* SceneDelegate.swift in Sources */,
 				B8ECD7412C0F163000FED45E /* SignUpViewController.swift in Sources */,
 				B83069E22C18418100816BBE /* SearchCollectionViewCell.swift in Sources */,
 				B80E942C2C10468A000D6645 /* SignUpTextField.swift in Sources */,
+				B806ADFA2C29505A00D8D540 /* TVDetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

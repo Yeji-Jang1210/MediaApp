@@ -113,21 +113,22 @@ class TrendMovieInfoViewController: MediaViewController {
     }
     
     func callTrendingMovieAPIResponse(completion: @escaping ([Movie]?) -> Void){
-        AF.request(MediaAPI.trendURL.url, method: .get, headers: APIService.headers).responseDecodable(of: TrendMovie.self){ response in
-            switch response.result {
-            case .success(let value):
-                var movies = value.results
+        
+        APIManager.callAPI(url: MediaAPI.trendURL.url, type: TrendMovie.self) { result in
+            switch result {
+            case .success(let data):
+                var movies = data.results
                 let dispatchGroup = DispatchGroup()
                 
                 for index in movies.indices {
                     dispatchGroup.enter()
                     
-                    AF.request(MediaAPI.creditURL(movieId: movies[index].id).url, method: .get, headers: APIService.headers).responseDecodable(of: Credit.self){ response in
-                        switch response.result {
+                    APIManager.callAPI(url: MediaAPI.creditURL(movieId: movies[index].id).url, type: Credit.self) { result in
+                        switch result {
                         case .success(let credit):
                             movies[index].credit = credit
                             dispatchGroup.leave()
-                        case .failure(let error):
+                        case .error(let error):
                             print(error)
                         }
                     }
@@ -136,8 +137,7 @@ class TrendMovieInfoViewController: MediaViewController {
                 dispatchGroup.notify(queue: .main) {
                     completion(movies)
                 }
-                
-            case .failure(let error):
+            case .error(let error):
                 print(error)
             }
         }

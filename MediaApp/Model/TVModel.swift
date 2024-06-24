@@ -7,14 +7,15 @@
 
 import Foundation
 
-struct SearchResult: Decodable {
+struct SearchResult: Codable {
     let page: Int
     let total_pages: Int
     let total_results: Int
     var results: [TVProgram]
 }
 
-struct TVProgram: Decodable {
+struct TVProgram: Codable {
+    let id: Int
     let original_name: String
     var poster_path: String?
     let vote_average: Double
@@ -32,4 +33,12 @@ struct TVProgram: Decodable {
 
         return list.count == 0 ? "" : "#\(list.joined(separator: " #"))"
     }
+}
+
+struct TVProgramPoster: Codable {
+    let backdrops: [Poster]
+}
+
+struct Poster: Codable {
+    let file_path: String
 }

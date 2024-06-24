@@ -34,11 +34,11 @@ class GenreManager {
             url = MediaAPI.tvGenreURL.url
         }
         
-        AF.request(url, method: .get, headers: APIService.headers).responseDecodable(of: Genres.self) { response in
-            switch response.result {
+        APIManager.callAPI(url: url, type: Genres.self) { result in
+            switch result {
             case .success(let value):
                 self.genres = value.genres
-            case .failure(let error):
+            case .error(let error):
                 print(error)
             }
         }
