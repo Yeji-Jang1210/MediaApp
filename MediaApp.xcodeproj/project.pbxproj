@@ -11,6 +11,7 @@
 		B806ADFC2C29508B00D8D540 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B806ADFB2C29508B00D8D540 /* APIManager.swift */; };
 		B806AE002C296BA800D8D540 /* PosterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B806ADFF2C296BA800D8D540 /* PosterCollectionViewCell.swift */; };
 		B806AE022C29705100D8D540 /* PosterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B806AE012C29705100D8D540 /* PosterTableViewCell.swift */; };
+		B806AE042C299DE400D8D540 /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B806AE032C299DE400D8D540 /* MainTabViewController.swift */; };
 		B80E94282C104629000D6645 /* CustomVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80E94272C104629000D6645 /* CustomVC.swift */; };
 		B80E942A2C104653000D6645 /* MiniPosterUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80E94292C104653000D6645 /* MiniPosterUIView.swift */; };
 		B80E942C2C10468A000D6645 /* SignUpTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80E942B2C10468A000D6645 /* SignUpTextField.swift */; };
@@ -20,7 +21,6 @@
 		B83069E22C18418100816BBE /* SearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83069E12C18418100816BBE /* SearchCollectionViewCell.swift */; };
 		B8ECD7202C0EF60200FED45E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8ECD71F2C0EF60200FED45E /* AppDelegate.swift */; };
 		B8ECD7222C0EF60200FED45E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8ECD7212C0EF60200FED45E /* SceneDelegate.swift */; };
-		B8ECD7272C0EF60200FED45E /* Base in Resources */ = {isa = PBXBuildFile; fileRef = B8ECD7262C0EF60200FED45E /* Base */; };
 		B8ECD7292C0EF60400FED45E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8ECD7282C0EF60400FED45E /* Assets.xcassets */; };
 		B8ECD72C2C0EF60400FED45E /* Base in Resources */ = {isa = PBXBuildFile; fileRef = B8ECD72B2C0EF60400FED45E /* Base */; };
 		B8ECD7342C0EFA6A00FED45E /* MediaMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8ECD7332C0EFA6A00FED45E /* MediaMainViewController.swift */; };
@@ -45,6 +45,7 @@
 		B806ADFB2C29508B00D8D540 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		B806ADFF2C296BA800D8D540 /* PosterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosterCollectionViewCell.swift; sourceTree = "<group>"; };
 		B806AE012C29705100D8D540 /* PosterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosterTableViewCell.swift; sourceTree = "<group>"; };
+		B806AE032C299DE400D8D540 /* MainTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
 		B80E94272C104629000D6645 /* CustomVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomVC.swift; sourceTree = "<group>"; };
 		B80E94292C104653000D6645 /* MiniPosterUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniPosterUIView.swift; sourceTree = "<group>"; };
 		B80E942B2C10468A000D6645 /* SignUpTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTextField.swift; sourceTree = "<group>"; };
@@ -54,7 +55,6 @@
 		B8ECD71C2C0EF60200FED45E /* MediaApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MediaApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8ECD71F2C0EF60200FED45E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B8ECD7212C0EF60200FED45E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		B8ECD7262C0EF60200FED45E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B8ECD7282C0EF60400FED45E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B8ECD72B2C0EF60400FED45E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B8ECD72D2C0EF60400FED45E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -147,7 +147,6 @@
 			children = (
 				B83069D92C18376800816BBE /* SearchMedia */,
 				B8F852E42C172665000B2A51 /* TrendMovie */,
-				B8ECD7252C0EF60200FED45E /* Main.storyboard */,
 				B8ECD7332C0EFA6A00FED45E /* MediaMainViewController.swift */,
 				B8ECD7402C0F163000FED45E /* SignUpViewController.swift */,
 			);
@@ -159,6 +158,7 @@
 			children = (
 				B8ECD71F2C0EF60200FED45E /* AppDelegate.swift */,
 				B8ECD7212C0EF60200FED45E /* SceneDelegate.swift */,
+				B806AE032C299DE400D8D540 /* MainTabViewController.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -283,7 +283,6 @@
 				B8F852DC2C16E49F000B2A51 /* .gitignore in Resources */,
 				B8ECD7292C0EF60400FED45E /* Assets.xcassets in Resources */,
 				B8ECD72C2C0EF60400FED45E /* Base in Resources */,
-				B8ECD7272C0EF60200FED45E /* Base in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,6 +310,7 @@
 				B80E942A2C104653000D6645 /* MiniPosterUIView.swift in Sources */,
 				B8F852DE2C16E4B7000B2A51 /* APIKey.swift in Sources */,
 				B806AE022C29705100D8D540 /* PosterTableViewCell.swift in Sources */,
+				B806AE042C299DE400D8D540 /* MainTabViewController.swift in Sources */,
 				B80E94282C104629000D6645 /* CustomVC.swift in Sources */,
 				B8ECD7222C0EF60200FED45E /* SceneDelegate.swift in Sources */,
 				B8ECD7412C0F163000FED45E /* SignUpViewController.swift in Sources */,
@@ -323,14 +323,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		B8ECD7252C0EF60200FED45E /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				B8ECD7262C0EF60200FED45E /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		B8ECD72A2C0EF60400FED45E /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -473,7 +465,6 @@
 				INFOPLIST_FILE = MediaApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -505,7 +496,6 @@
 				INFOPLIST_FILE = MediaApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
