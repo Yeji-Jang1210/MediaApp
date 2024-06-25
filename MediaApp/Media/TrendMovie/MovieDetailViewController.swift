@@ -25,7 +25,7 @@ enum MovieDetailSection: Int, CaseIterable {
     }
 }
 
-class MovieDetailViewController: MediaViewController {
+class MovieDetailViewController: BaseVC {
     
     //MARK: - object
     let backImageView: UIImageView = {
@@ -75,13 +75,10 @@ class MovieDetailViewController: MediaViewController {
     //MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureHierarchy()
-        configureLayout()
-        configureUI()
     }
     
     //MARK: - configure function
-    func configureHierarchy(){
+    override func configureHierarchy(){
         view.addSubview(tableView)
         view.addSubview(backImageView)
         view.addSubview(overlayBackView)
@@ -89,7 +86,7 @@ class MovieDetailViewController: MediaViewController {
         view.addSubview(titleLabel)
     }
     
-    func configureLayout(){
+    override func configureLayout(){
         backImageView.snp.makeConstraints { make in
             make.top.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
             make.height.equalTo(backImageView.snp.width).multipliedBy(0.5)
@@ -119,15 +116,14 @@ class MovieDetailViewController: MediaViewController {
         
     }
     
-    func configureUI(){
+    override func configureUI(){
         configureNavigation()
         configureTableView()
         
         fetchData()
     }
     
-    override func configureNavigation() {
-        super.configureNavigation()
+    func configureNavigation() {
         navigationItem.title = "출연/제작"
     }
     

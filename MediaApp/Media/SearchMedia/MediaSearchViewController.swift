@@ -11,7 +11,7 @@ import Alamofire
 import SnapKit
 import Kingfisher
 
-class MediaSearchViewController: MediaViewController {
+class MediaSearchViewController: BaseVC {
     //MARK: - object
     let backView: UIView = {
         let object = UIView()
@@ -68,15 +68,11 @@ class MediaSearchViewController: MediaViewController {
     //MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureHierarchy()
-        configureLayout()
-        configureUI()
-        
         bindAction()
     }
     
     //MARK: - configure function
-    func configureHierarchy(){
+    override func configureHierarchy(){
         view.addSubview(backView)
         view.addSubview(collectionView)
         view.addSubview(topButton)
@@ -85,7 +81,7 @@ class MediaSearchViewController: MediaViewController {
         backView.addSubview(searchButton)
     }
     
-    func configureLayout(){
+    override func configureLayout(){
         backView.snp.makeConstraints { make in
             make.top.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(12)
             make.height.equalTo(60)
@@ -114,7 +110,7 @@ class MediaSearchViewController: MediaViewController {
         }
     }
     
-    func configureUI(){
+    override func configureUI(){
         configureCollectionView()
         backView.layoutIfNeeded()
         backView.layer.cornerRadius = backView.bounds.height / 2

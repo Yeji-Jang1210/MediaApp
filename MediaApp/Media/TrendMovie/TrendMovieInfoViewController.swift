@@ -8,7 +8,7 @@
 import UIKit
 import Alamofire
 
-class TrendMovieInfoViewController: MediaViewController {
+class TrendMovieInfoViewController: BaseVC {
     //MARK: - object
     let tableView: UITableView = {
         let object = UITableView()
@@ -40,10 +40,7 @@ class TrendMovieInfoViewController: MediaViewController {
     //MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureHierarchy()
-        configureLayout()
-        configureUI()
-        
+
         GenreManager.fetchData(for: .movie)
         
         callTrendingMovieAPIResponse { movies in
@@ -54,13 +51,13 @@ class TrendMovieInfoViewController: MediaViewController {
     }
     
     //MARK: - configure function
-    func configureHierarchy(){
+    override func configureHierarchy(){
         view.addSubview(tableView)
         view.addSubview(scrollTopButton)
         navigationItem.titleView = textField
     }
     
-    func configureLayout(){
+    override func configureLayout(){
         tableView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
@@ -71,14 +68,13 @@ class TrendMovieInfoViewController: MediaViewController {
         }
     }
     
-    func configureUI(){
+    override func configureUI(){
         configureTableView()
-        
+        configureNavigation()
         scrollTopButton.addTarget(self, action: #selector(scrollTopButtonTapped), for: .touchUpInside)
     }
     
-    override func configureNavigation() {
-        super.configureNavigation()
+    func configureNavigation() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal"), style: .done, target: self, action: #selector(searchButtonClicked))
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .done, target: self, action: #selector(menuButtonClicked))
         navigationController?.navigationBar.tintColor = .white

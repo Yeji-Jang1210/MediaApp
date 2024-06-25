@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class SignUpViewController: MediaViewController {
+class SignUpViewController: BaseVC {
     
 //MARK: objects
     let titleLabel: UILabel = {
@@ -89,11 +89,9 @@ class SignUpViewController: MediaViewController {
 //MARK: Method
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureHierarchy()
-        configureLayout()
     }
     
-    func configureHierarchy(){
+    override func configureHierarchy(){
         view.addSubview(titleLabel)
         view.addSubview(textFieldStackView)
         
@@ -106,7 +104,7 @@ class SignUpViewController: MediaViewController {
         view.addSubview(addInfoSwitch)
     }
     
-    func configureLayout(){
+    override func configureLayout(){
         titleLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalToSuperview().inset(100)

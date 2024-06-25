@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class MediaMainViewController: MediaViewController {
+class MediaMainViewController: BaseVC {
     
     let contentScrollView: UIScrollView = {
         let object = UIScrollView()
@@ -117,16 +117,10 @@ class MediaMainViewController: MediaViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureNavigationBar()
-        configureHierarchy()
-        configureLayout()
+        
     }
     
-    func configureNavigationBar(){
-        navigationItem.title = "고래밥님"
-    }
-    
-    func configureHierarchy(){
+    override func configureHierarchy(){
         view.addSubview(contentScrollView)
         contentScrollView.addSubview(contentView)
         contentView.addSubview(mainPosterImageView)
@@ -145,7 +139,7 @@ class MediaMainViewController: MediaViewController {
         }
     }
     
-    func configureLayout(){
+    override func configureLayout(){
         contentScrollView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
@@ -197,5 +191,13 @@ class MediaMainViewController: MediaViewController {
                 make.height.equalTo(item.snp.width).multipliedBy(1.4)
             }
         }
+    }
+    
+    override func configureUI() {
+        configureNavigationBar()
+    }
+    
+    func configureNavigationBar(){
+        navigationItem.title = "고래밥님"
     }
 }

@@ -12,7 +12,7 @@
 		B806AE002C296BA800D8D540 /* PosterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B806ADFF2C296BA800D8D540 /* PosterCollectionViewCell.swift */; };
 		B806AE022C29705100D8D540 /* PosterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B806AE012C29705100D8D540 /* PosterTableViewCell.swift */; };
 		B806AE042C299DE400D8D540 /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B806AE032C299DE400D8D540 /* MainTabViewController.swift */; };
-		B80E94282C104629000D6645 /* CustomVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80E94272C104629000D6645 /* CustomVC.swift */; };
+		B80E94282C104629000D6645 /* BaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80E94272C104629000D6645 /* BaseVC.swift */; };
 		B80E942A2C104653000D6645 /* MiniPosterUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80E94292C104653000D6645 /* MiniPosterUIView.swift */; };
 		B80E942C2C10468A000D6645 /* SignUpTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80E942B2C10468A000D6645 /* SignUpTextField.swift */; };
 		B83069DB2C1837A400816BBE /* MediaSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83069DA2C1837A400816BBE /* MediaSearchViewController.swift */; };
@@ -46,7 +46,7 @@
 		B806ADFF2C296BA800D8D540 /* PosterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosterCollectionViewCell.swift; sourceTree = "<group>"; };
 		B806AE012C29705100D8D540 /* PosterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosterTableViewCell.swift; sourceTree = "<group>"; };
 		B806AE032C299DE400D8D540 /* MainTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
-		B80E94272C104629000D6645 /* CustomVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomVC.swift; sourceTree = "<group>"; };
+		B80E94272C104629000D6645 /* BaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseVC.swift; sourceTree = "<group>"; };
 		B80E94292C104653000D6645 /* MiniPosterUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniPosterUIView.swift; sourceTree = "<group>"; };
 		B80E942B2C10468A000D6645 /* SignUpTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTextField.swift; sourceTree = "<group>"; };
 		B83069DA2C1837A400816BBE /* MediaSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaSearchViewController.swift; sourceTree = "<group>"; };
@@ -90,7 +90,7 @@
 		B80E94262C1045CB000D6645 /* Custom */ = {
 			isa = PBXGroup;
 			children = (
-				B80E94272C104629000D6645 /* CustomVC.swift */,
+				B80E94272C104629000D6645 /* BaseVC.swift */,
 				B80E94292C104653000D6645 /* MiniPosterUIView.swift */,
 				B80E942B2C10468A000D6645 /* SignUpTextField.swift */,
 			);
@@ -319,7 +319,7 @@
 				B8F852DE2C16E4B7000B2A51 /* APIKey.swift in Sources */,
 				B806AE022C29705100D8D540 /* PosterTableViewCell.swift in Sources */,
 				B806AE042C299DE400D8D540 /* MainTabViewController.swift in Sources */,
-				B80E94282C104629000D6645 /* CustomVC.swift in Sources */,
+				B80E94282C104629000D6645 /* BaseVC.swift in Sources */,
 				B8ECD7222C0EF60200FED45E /* SceneDelegate.swift in Sources */,
 				B8ECD7412C0F163000FED45E /* SignUpViewController.swift in Sources */,
 				B83069E22C18418100816BBE /* SearchCollectionViewCell.swift in Sources */,
