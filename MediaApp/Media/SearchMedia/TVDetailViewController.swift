@@ -125,7 +125,7 @@ class TVDetailViewController: UIViewController {
 
 extension TVDetailViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        switch indexPath.section {
+        switch indexPath.row {
         case 2:
             return UIScreen.main.bounds.height * 0.34
         default:
@@ -134,23 +134,22 @@ extension TVDetailViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
         return CollectionViewList.allCases.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: PosterTableViewCell.identifier, for: indexPath) as! PosterTableViewCell
         
-        cell.titleLabel.text = CollectionViewList.allCases[indexPath.section].title
+        print("indexPath: ", indexPath)
+        
+        cell.titleLabel.text = CollectionViewList.allCases[indexPath.row].title
         cell.collectionView.register(PosterCollectionViewCell.self, forCellWithReuseIdentifier: PosterCollectionViewCell.identifier)
-        cell.collectionView.tag = indexPath.section
         
-        guard let url = CollectionViewList(rawValue: indexPath.section)?.getURL(id: self.id) else { return cell }
+        cell.collectionView.tag = indexPath.row
         
-        switch indexPath.section {
+        guard let url = CollectionViewList(rawValue: indexPath.row)?.getURL(id: self.id) else { return cell }
+        
+        switch indexPath.row {
         case 0,1:
             DispatchQueue.global().async {
                 APIManager.getPosterPath(url: url) { paths in
