@@ -93,6 +93,7 @@ class TVDetailViewController: UIViewController {
         configureNavigation()
         configureTableView()
         
+        view.backgroundColor = .black
         programTitleLabel.text = programTitle
     }
     
@@ -104,6 +105,7 @@ class TVDetailViewController: UIViewController {
     
     private func configureTableView(){
         tableView.backgroundColor = .clear
+        tableView.allowsSelection = false
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(PosterTableViewCell.self, forCellReuseIdentifier: PosterTableViewCell.identifier)
@@ -153,7 +155,9 @@ extension TVDetailViewController: UITableViewDelegate, UITableViewDataSource {
             DispatchQueue.global().async {
                 APIManager.getPosterPath(url: url) { paths in
                     cell.paths = paths
-                    cell.collectionView.reloadData()
+                    DispatchQueue.main.async {
+                        cell.collectionView.reloadData()
+                    }
                 }
             }
         case 2:
@@ -162,7 +166,9 @@ extension TVDetailViewController: UITableViewDelegate, UITableViewDataSource {
                     switch result {
                     case .success(let data):
                         cell.paths = data.backdrops.map { MediaAPI.imageURL(imagePath: $0.file_path).url }
-                        cell.collectionView.reloadData()
+                        DispatchQueue.main.async {
+                            cell.collectionView.reloadData()
+                        }
                     case .error(let error):
                         print(error)
                     }
