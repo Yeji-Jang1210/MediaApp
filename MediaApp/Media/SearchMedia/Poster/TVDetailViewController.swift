@@ -26,6 +26,15 @@ class TVDetailViewController: UIViewController {
             }
         }
         
+        var type: Any {
+            switch self {
+            case .similar, .recomments:
+                return SearchResult.self
+            case .poster:
+                return TVProgramPoster.self
+            }
+        }
+        
         func getURL(id: Int) -> String {
             switch self {
             case .similar:
@@ -51,6 +60,7 @@ class TVDetailViewController: UIViewController {
     //MARK: - properties
     var programTitle: String = ""
     var id: Int = 0
+    var paths: [[String]] = Array(repeating: [], count: CollectionViewList.allCases.count)
     
     //MARK: - life cycle
     init(id: Int, title: String){
@@ -69,7 +79,7 @@ class TVDetailViewController: UIViewController {
         configureLayout()
         configureUI()
         
-        tableView.reloadData()
+        fetchData()
     }
     
     //MARK: - configure function
@@ -119,7 +129,45 @@ class TVDetailViewController: UIViewController {
     
     @objc
     func menuButtonTapped(){
-        tableView.reloadData()
+    }
+    
+    func fetchData(){
+        
+        let group = DispatchGroup()
+    
+        for (index, item) in CollectionViewList.allCases.enumerated() {
+            group.enter()
+            switch item {
+            case .similar, .recomments:
+                DispatchQueue.global().async {
+                    APIManager.callAPI(url: item.getURL(id: self.id), type: SearchResult.self) { result in
+                        switch result {
+                        case .success(let data):
+                            self.paths[index] = data.results.filter{$0.poster_path != nil}.map{ MediaAPI.imageURL(imagePath: $0.poster_path!).url }
+                                group.leave()
+                        case .error(let error):
+                            print(error)
+                        }
+                    }
+                }
+            case .poster:
+                DispatchQueue.global().async {
+                    APIManager.callAPI(url: item.getURL(id: self.id), type: TVProgramPoster.self) { result in
+                        switch result {
+                        case .success(let data):
+                                self.paths[index] = data.backdrops.map { MediaAPI.imageURL(imagePath: $0.file_path).url }
+                                group.leave()
+                        case .error(let error):
+                            print(error)
+                        }
+                    }
+                }
+            }
+        }
+        
+        group.notify(queue: .main){
+            self.tableView.reloadData()
+        }
     }
 }
 
@@ -134,48 +182,38 @@ extension TVDetailViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return CollectionViewList.allCases.count
+        return paths.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: PosterTableViewCell.identifier, for: indexPath) as! PosterTableViewCell
         
-        print("indexPath: ", indexPath)
-        
         cell.titleLabel.text = CollectionViewList.allCases[indexPath.row].title
         cell.collectionView.register(PosterCollectionViewCell.self, forCellWithReuseIdentifier: PosterCollectionViewCell.identifier)
-        
         cell.collectionView.tag = indexPath.row
+        cell.collectionView.delegate = self
+        cell.collectionView.dataSource = self
         
-        guard let url = CollectionViewList(rawValue: indexPath.row)?.getURL(id: self.id) else { return cell }
-        
-        switch indexPath.row {
-        case 0,1:
-            DispatchQueue.global().async {
-                APIManager.getPosterPath(url: url) { paths in
-                    cell.paths = paths
-                    DispatchQueue.main.async {
-                        cell.collectionView.reloadData()
-                    }
-                }
-            }
-        case 2:
-            DispatchQueue.global().async {
-                APIManager.callAPI(url: url, type: TVProgramPoster.self) { result in
-                    switch result {
-                    case .success(let data):
-                        cell.paths = data.backdrops.map { MediaAPI.imageURL(imagePath: $0.file_path).url }
-                        DispatchQueue.main.async {
-                            cell.collectionView.reloadData()
-                        }
-                    case .error(let error):
-                        print(error)
-                    }
-                }
-            }
-        default:
-            break
-        }
+        cell.collectionView.reloadData()
         return cell
+    }
+}
+
+extension TVDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return paths[collectionView.tag].count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PosterCollectionViewCell.identifier, for: indexPath) as! PosterCollectionViewCell
+        
+        cell.setImage(path: paths[collectionView.tag][indexPath.row])
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = collectionView.frame.height * 0.7
+        return CGSize(width: width, height: collectionView.frame.height)
     }
 }

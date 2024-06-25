@@ -64,28 +64,6 @@ class PosterTableViewCell: UITableViewCell {
     
     private func configureUI(){
         backgroundColor = .clear
-        
-        collectionView.delegate = self
-        collectionView.dataSource = self
     }
     //MARK: - function
-}
-
-extension PosterTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return paths.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PosterCollectionViewCell.identifier, for: indexPath) as! PosterCollectionViewCell
-        
-        cell.setImage(path: paths[indexPath.row])
-        
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = collectionView.frame.height * 0.7
-        return CGSize(width: width, height: collectionView.frame.height)
-    }
 }

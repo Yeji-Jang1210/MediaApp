@@ -54,6 +54,7 @@ class PosterCollectionViewCell: UICollectionViewCell {
     //MARK: - function
     public func setImage(path: String){
         guard let url = URL(string: path) else { return }
+        posterImageView.kf.indicatorType = .activity
         posterImageView.kf.setImage(with: url)
     }
 }

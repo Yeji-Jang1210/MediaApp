@@ -100,13 +100,21 @@
 		B83069D92C18376800816BBE /* SearchMedia */ = {
 			isa = PBXGroup;
 			children = (
+				B8759EFA2C2AB39300D8B30B /* Poster */,
 				B83069DA2C1837A400816BBE /* MediaSearchViewController.swift */,
 				B83069E12C18418100816BBE /* SearchCollectionViewCell.swift */,
+			);
+			path = SearchMedia;
+			sourceTree = "<group>";
+		};
+		B8759EFA2C2AB39300D8B30B /* Poster */ = {
+			isa = PBXGroup;
+			children = (
 				B806ADF92C29505A00D8D540 /* TVDetailViewController.swift */,
 				B806ADFF2C296BA800D8D540 /* PosterCollectionViewCell.swift */,
 				B806AE012C29705100D8D540 /* PosterTableViewCell.swift */,
 			);
-			path = SearchMedia;
+			path = Poster;
 			sourceTree = "<group>";
 		};
 		B8ECD7132C0EF60200FED45E = {
