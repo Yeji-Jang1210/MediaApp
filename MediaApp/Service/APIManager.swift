@@ -26,18 +26,4 @@ class APIManager {
             }
         }
     }
-    
-    static func getPosterPath(url: String, completion: @escaping ([String]) -> Void){
-        AF.request(url, headers: APIInfo.headers).responseDecodable(of: SearchResult.self) { response in
-            switch response.result {
-            case .success(let data):
-                let list = data.results
-                                .filter { $0.poster_path != nil }
-                                .map{ MediaAPI.imageURL(imagePath: $0.poster_path!).url }
-                completion(list)
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
 }
