@@ -126,14 +126,14 @@ class MediaSearchViewController: BaseVC {
     
     //MARK: - function
     func bindAction(){
-        GenreManager.fetchData(for: .tv)
+        GenreManager.fetchData(for: MediaAPI.tvGenreURL)
         
         searchButton.addTarget(self, action: #selector(searchButtonTapped), for: .touchUpInside)
         topButton.addTarget(self, action: #selector(topButtonTapped), for: .touchUpInside)
     }
     
     func callAPI(text: String){
-        APIManager.callAPI(url: MediaAPI.searchURL(text: text, page: self.page).url, type: SearchResult.self) { result in
+        APIManager.callAPI(api: MediaAPI.searchURL(text: text, page: self.page), type: SearchResult.self) { result in
             switch result {
             case .success(let value):
                 if self.page == 1 {

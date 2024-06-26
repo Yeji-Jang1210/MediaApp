@@ -17,24 +17,12 @@ struct Genre: Codable {
     let name: String
 }
 
-enum MediaType {
-    case movie
-    case tv
-}
-
 class GenreManager {
     static var genres: [Genre] = []
     
-    static func fetchData(for type: MediaType){
-        let url: String
-        switch type {
-        case .movie:
-            url = MediaAPI.movieGenreURL.url
-        case .tv:
-            url = MediaAPI.tvGenreURL.url
-        }
+    static func fetchData(for type: MediaAPI){
         
-        APIManager.callAPI(url: url, type: Genres.self) { result in
+        APIManager.callAPI(api: type, type: Genres.self) { result in
             switch result {
             case .success(let value):
                 self.genres = value.genres

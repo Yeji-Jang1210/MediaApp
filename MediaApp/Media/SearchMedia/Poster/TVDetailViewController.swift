@@ -35,14 +35,14 @@ class TVDetailViewController: UIViewController {
             }
         }
         
-        func getURL(id: Int) -> String {
+        func getAPIType(id: Int) -> MediaAPI {
             switch self {
             case .similar:
-                return MediaAPI.similarURL(id: id).url
+                return MediaAPI.similarURL(id: id)
             case .recomments:
-                return MediaAPI.recommendationsURL(id: id).url
+                return MediaAPI.recommendationsURL(id: id)
             case .poster:
-                return MediaAPI.getPostersURL(id: id).url
+                return MediaAPI.getPostersURL(id: id)
             }
         }
     }
@@ -140,7 +140,7 @@ class TVDetailViewController: UIViewController {
             switch item {
             case .similar, .recomments:
                 DispatchQueue.global().async {
-                    APIManager.callAPI(url: item.getURL(id: self.id), type: SearchResult.self) { result in
+                    APIManager.callAPI(api: item.getAPIType(id: self.id), type: SearchResult.self) { result in
                         switch result {
                         case .success(let data):
                             self.paths[index] = data.results.filter{$0.poster_path != nil}.map{ MediaAPI.imageURL(imagePath: $0.poster_path!).url }
@@ -152,7 +152,7 @@ class TVDetailViewController: UIViewController {
                 }
             case .poster:
                 DispatchQueue.global().async {
-                    APIManager.callAPI(url: item.getURL(id: self.id), type: TVProgramPoster.self) { result in
+                    APIManager.callAPI(api: item.getAPIType(id: self.id), type: TVProgramPoster.self) { result in
                         switch result {
                         case .success(let data):
                                 self.paths[index] = data.backdrops.map { MediaAPI.imageURL(imagePath: $0.file_path).url }

@@ -16,8 +16,12 @@ enum NetworkResult<T> {
 class APIManager {
     private init(){}
     
-    static func callAPI<T: Codable>(url: String, type: T.Type = T.self, completion: @escaping (NetworkResult<T>) -> Void){
-        AF.request(url, headers: APIInfo.headers).responseDecodable(of: type) { response in
+    static func callAPI<T: Codable>(api: MediaAPI, type: T.Type = T.self, completion: @escaping (NetworkResult<T>) -> Void){
+        AF.request(api.url,
+                   method: api.method,
+                   parameters: api.parameters,
+                   encoding: URLEncoding(destination: .queryString),
+                   headers: APIInfo.headers).responseDecodable(of: type) { response in
             switch response.result {
             case .success(let data):
                 completion(.success(data))

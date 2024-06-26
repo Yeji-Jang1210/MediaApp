@@ -41,7 +41,7 @@ class TrendMovieInfoViewController: BaseVC {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        GenreManager.fetchData(for: .movie)
+        GenreManager.fetchData(for: MediaAPI.movieGenreURL)
         
         callTrendingMovieAPIResponse { movies in
             guard let movies else { return }
@@ -110,7 +110,7 @@ class TrendMovieInfoViewController: BaseVC {
     
     func callTrendingMovieAPIResponse(completion: @escaping ([Movie]?) -> Void){
         
-        APIManager.callAPI(url: MediaAPI.trendURL.url, type: TrendMovie.self) { result in
+        APIManager.callAPI(api: MediaAPI.trendURL, type: TrendMovie.self) { result in
             switch result {
             case .success(let data):
                 var movies = data.results
@@ -119,7 +119,7 @@ class TrendMovieInfoViewController: BaseVC {
                 for index in movies.indices {
                     dispatchGroup.enter()
                     
-                    APIManager.callAPI(url: MediaAPI.creditURL(movieId: movies[index].id).url, type: Credit.self) { result in
+                    APIManager.callAPI(api: MediaAPI.creditURL(movieId: movies[index].id), type: Credit.self) { result in
                         switch result {
                         case .success(let credit):
                             movies[index].credit = credit
