@@ -79,10 +79,19 @@ class MovieDetailViewController: BaseVC {
     
     var currentPosterPage: Int = 0
     
+    var posterLoopTimer: Timer?
+    
     //MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchMoviePosters()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        posterLoopTimer?.invalidate()
+        posterLoopTimer = nil
     }
     
     //MARK: - configure function
@@ -208,7 +217,7 @@ extension MovieDetailViewController: UITableViewDelegate, UITableViewDataSource 
         switch section {
         case .overView:
             let cell = tableView.dequeueReusableCell(withIdentifier: ExpandTextViewCell.identifier) as! ExpandTextViewCell
-                                      cell.fetchData(movie?.overview)
+            cell.fetchData(movie?.overview)
             cell.overViewLabel.numberOfLines = isExpanded ? 0 : 2
             cell.button.addTarget(self, action: #selector(expandOverViewLabel), for: .touchUpInside)
             return cell
@@ -240,11 +249,11 @@ extension MovieDetailViewController: UICollectionViewDelegate, UICollectionViewD
     }
     
     func startPosterLoop(){
-            let _ = Timer.scheduledTimer(withTimeInterval: 3, repeats: true) { _ in
-                self.moveNextBanner()
-            }
+        posterLoopTimer = Timer.scheduledTimer(withTimeInterval: 3, repeats: true) { _ in
+            self.moveNextBanner()
         }
-
+    }
+    
     func moveNextBanner(){
         let itemCount = collectionView.numberOfItems(inSection: 0)
         let targetIndex = currentPosterPage + 1
