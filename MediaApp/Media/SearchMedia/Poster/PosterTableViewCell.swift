@@ -7,9 +7,9 @@
 
 import UIKit
 
-class PosterTableViewCell: UITableViewCell {
+class PosterTableViewCell: UITableViewCell, Identifier {
     
-    static let identifier = String(describing: PosterTableViewCell.self)
+    static var identifier = String(describing: PosterTableViewCell.self)
 
     //MARK: - object
     let titleLabel: UILabel = {

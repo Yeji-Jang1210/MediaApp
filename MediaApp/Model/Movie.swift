@@ -34,6 +34,14 @@ struct Movie: Codable {
 
         return "#\(list.joined(separator: " #"))"
     }
+    
+    var extractedYear: String {
+        guard let date = release_date.convertStringToDate("yyyy-MM-dd") else {
+            return ""
+        }
+        
+        return date.convertDateToString("yyyy") ?? ""
+    }
 }
 
 struct Credit: Codable {

@@ -18,7 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: scene)
         
         let vc = MainTabViewController()
-        
+            
         //entry point
         window?.rootViewController = vc
         

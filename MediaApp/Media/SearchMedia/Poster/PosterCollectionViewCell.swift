@@ -9,8 +9,8 @@ import UIKit
 import SnapKit
 import Kingfisher
 
-class PosterCollectionViewCell: UICollectionViewCell {
-    static let identifier = String(describing: PosterCollectionViewCell.self)
+class PosterCollectionViewCell: UICollectionViewCell, Identifier {
+    static var identifier = String(describing: PosterCollectionViewCell.self)
     
     //MARK: - object
     

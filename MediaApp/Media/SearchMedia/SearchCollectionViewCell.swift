@@ -11,7 +11,7 @@ import Cosmos
 import Kingfisher
 import SnapKit
 
-class SearchCollectionViewCell: UICollectionViewCell {
+class SearchCollectionViewCell: UICollectionViewCell, Identifier {
     static var identifier = String(describing: SearchCollectionViewCell.self)
     
 //MARK: - object

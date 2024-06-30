@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class TVDetailViewController: UIViewController {
+class TVDetailViewController: BaseVC {
     
     enum CollectionViewList: Int, CaseIterable {
         case similar
@@ -83,12 +83,12 @@ class TVDetailViewController: UIViewController {
     }
     
     //MARK: - configure function
-    private func configureHierarchy(){
+    override func configureHierarchy(){
         view.addSubview(programTitleLabel)
         view.addSubview(tableView)
     }
     
-    private func configureLayout(){
+    override func configureLayout(){
         programTitleLabel.snp.makeConstraints { make in
             make.top.leading.equalTo(view.safeAreaLayoutGuide).inset(12)
         }
@@ -99,7 +99,7 @@ class TVDetailViewController: UIViewController {
         }
     }
     
-    private func configureUI(){
+    override func configureUI(){
         configureNavigation()
         configureTableView()
         
@@ -108,8 +108,8 @@ class TVDetailViewController: UIViewController {
     }
     
     private func configureNavigation(){
+        navigationController?.navigationBar.tintColor = .white
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .done, target: self, action: #selector(dismissButtonTapped))
-        
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "ellipsis.circle"), style: .done, target: self, action: #selector(menuButtonTapped))
     }
     

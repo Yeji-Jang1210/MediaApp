@@ -8,7 +8,7 @@
 import UIKit
 import Kingfisher
 
-class MediaInfoTableViewCell: UITableViewCell {
+class MediaInfoTableViewCell: UITableViewCell, Identifier {
     
     static var identifier = String(describing: MediaInfoTableViewCell.self)
 
@@ -225,5 +225,6 @@ class MediaInfoTableViewCell: UITableViewCell {
         
         titleLabel.text = data.original_title
         casterLabel.text = data.credit?.castText
+        gradeLabel.text = String(format: "%.1f", data.vote_average)
     }
 }

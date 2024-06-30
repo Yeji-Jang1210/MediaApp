@@ -56,23 +56,11 @@ class MainTabViewController: UITabBarController {
     
     override func viewDidLoad(){
         super.viewDidLoad()
-        tabBar.tintColor = UIColor.white
-        tabBar.unselectedItemTintColor = UIColor.lightGray
+        setupStyle()
         
         let viewControllers = Tab.allCases.map { tab -> UINavigationController in
             let vc = tab.vc
             vc.tabBarItem = UITabBarItem(title: tab.title, image: tab.icon, tag: tab.rawValue)
-            
-            let appearance = UITabBarAppearance()
-            appearance.configureWithOpaqueBackground()
-            appearance.backgroundColor = .black
-            
-            
-            vc.tabBarController?.tabBar.backgroundColor = .black
-            vc.tabBarController?.tabBar.barTintColor = .black
-            
-            vc.tabBarController?.tabBar.scrollEdgeAppearance = appearance
-            vc.tabBarController?.tabBar.standardAppearance = appearance 
             
             return UINavigationController(rootViewController: vc)
         }
@@ -80,5 +68,44 @@ class MainTabViewController: UITabBarController {
         self.viewControllers = viewControllers
         
         self.selectedIndex = Tab.main.rawValue
+    }
+    
+    private func setupStyle() {
+        let navBarAppearance = UINavigationBarAppearance()
+        navBarAppearance.backgroundImage = UIImage()
+        navBarAppearance.backgroundColor = .black
+        navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+        UINavigationBar.appearance().scrollEdgeAppearance = navBarAppearance
+        UINavigationBar.appearance().standardAppearance = navBarAppearance
+        
+        UITabBar.appearance().backgroundImage = UIImage.colorForNavBar(color: .black)
+        UITabBar.appearance().shadowImage = UIImage.colorForNavBar(color: .black)
+        
+        UITabBar.appearance().tintColor = .white
+        UITabBar.appearance().unselectedItemTintColor = .lightGray
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font : UIFont.systemFont(ofSize: 13, weight: .regular)], for: .selected)
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font : UIFont.systemFont(ofSize: 13, weight: .regular)], for: .selected)
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.lightGray], for: .normal)
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.white], for: .selected)
+        
+    }
+}
+
+//MARK: - Extension
+extension UIImage {
+    class func colorForNavBar(color: UIColor) -> UIImage {
+        let rect = CGRect(x: 0.0, y: 0.0, width: 1.0, height: 1.0)
+        //    Or if you need a thinner border :
+        //    let rect = CGRect(x: 0.0, y: 0.0, width: 1.0, height: 0.5)
+        UIGraphicsBeginImageContext(rect.size)
+        let context = UIGraphicsGetCurrentContext()
+        
+        context!.setFillColor(color.cgColor)
+        context!.fill(rect)
+        
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return image!
     }
 }

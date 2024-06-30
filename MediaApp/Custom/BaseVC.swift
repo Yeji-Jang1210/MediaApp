@@ -13,13 +13,6 @@ class BaseVC: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .black
         
-        let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = .black
-        appearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        UINavigationBar.appearance().backgroundColor = .black
-        
-        navigationController?.navigationBar.standardAppearance = appearance
-        
         configureHierarchy()
         configureLayout()
         configureUI()
