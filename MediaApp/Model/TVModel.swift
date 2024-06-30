@@ -35,7 +35,7 @@ struct TVProgram: Codable {
     }
 }
 
-struct TVProgramPoster: Codable {
+struct MediaPosters: Codable {
     let backdrops: [Poster]
 }
 

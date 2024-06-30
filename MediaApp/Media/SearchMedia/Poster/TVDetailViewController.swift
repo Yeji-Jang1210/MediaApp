@@ -31,7 +31,7 @@ class TVDetailViewController: BaseVC {
             case .similar, .recomments:
                 return SearchResult.self
             case .poster:
-                return TVProgramPoster.self
+                return MediaPosters.self
             }
         }
         
@@ -42,7 +42,7 @@ class TVDetailViewController: BaseVC {
             case .recomments:
                 return MediaAPI.recommendationsURL(id: id)
             case .poster:
-                return MediaAPI.getPostersURL(id: id)
+                return MediaAPI.getPostersURL(type: .tv, id: id)
             }
         }
     }
@@ -152,7 +152,7 @@ class TVDetailViewController: BaseVC {
                 }
             case .poster:
                 DispatchQueue.global().async {
-                    APIManager.callAPI(api: item.getAPIType(id: self.id), type: TVProgramPoster.self) { result in
+                    APIManager.callAPI(api: item.getAPIType(id: self.id), type: MediaPosters.self) { result in
                         switch result {
                         case .success(let data):
                                 self.paths[index] = data.backdrops.map { MediaAPI.imageURL(imagePath: $0.file_path).url }

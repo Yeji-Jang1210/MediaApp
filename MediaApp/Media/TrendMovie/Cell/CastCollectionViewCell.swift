@@ -24,7 +24,6 @@ class CastCollectionViewCell: UICollectionViewCell, Identifier {
         object.clipsToBounds = true
         object.layer.cornerRadius = 8
         object.contentMode = .scaleAspectFill
-        object.backgroundColor = .red
         return object
     }()
     
@@ -68,7 +67,6 @@ class CastCollectionViewCell: UICollectionViewCell, Identifier {
         
         actorImageView.snp.makeConstraints { make in
             make.top.horizontalEdges.equalToSuperview()
-            make.height.equalTo(actorImageView.snp.width).multipliedBy(1.3)
         }
         
         actorNameLabel.snp.makeConstraints { make in
@@ -79,6 +77,7 @@ class CastCollectionViewCell: UICollectionViewCell, Identifier {
         characterNameLabel.snp.makeConstraints { make in
             make.top.equalTo(actorNameLabel.snp.bottom).offset(4)
             make.horizontalEdges.equalTo(actorImageView.snp.horizontalEdges)
+            make.bottom.equalToSuperview()
         }
     }
     

@@ -15,6 +15,8 @@ class CastTableViewCell: UITableViewCell, Identifier {
     
     static var identifier: String = String(describing: CastTableViewCell.self)
     
+    var casters: [Cast]?
+    
     //MARK: - object
     let collectionView: UICollectionView = {
         var layout = UICollectionViewFlowLayout()
@@ -24,6 +26,7 @@ class CastTableViewCell: UITableViewCell, Identifier {
         
         let object = UICollectionView(frame: .zero, collectionViewLayout: layout)
         object.backgroundColor = .clear
+        
         return object
     }()
     
@@ -33,6 +36,7 @@ class CastTableViewCell: UITableViewCell, Identifier {
         contentView.backgroundColor = .black
         configureHierarchy()
         configureLayout()
+        configureUI()
     }
     
     required init?(coder: NSCoder) {
@@ -47,5 +51,32 @@ class CastTableViewCell: UITableViewCell, Identifier {
         collectionView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+    }
+    
+    func configureUI(){
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(CastCollectionViewCell.self, forCellWithReuseIdentifier: CastCollectionViewCell.identifier)
+    }
+}
+
+extension CastTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return casters?.count ?? 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CastCollectionViewCell.identifier, for: indexPath) as! CastCollectionViewCell
+        if let cast = casters {
+            cell.fetchData(cast[indexPath.row])
+        }
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = UIScreen.main.bounds.width / 2 - 10
+        return CGSize(width: width, height: collectionView.bounds.height)
     }
 }

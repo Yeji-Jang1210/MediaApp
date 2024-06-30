@@ -10,14 +10,7 @@ import Cosmos
 import SnapKit
 import Kingfisher
 
-class CustomMovieDetailView: UIView {
-    let backImageView: UIImageView = {
-        let object = UIImageView()
-        object.clipsToBounds = true
-        object.contentMode = .scaleAspectFill
-        
-        return object
-    }()
+class MovieInfoView: UIView {
     
     let titleLabel: UILabel = {
         let object = UILabel()
@@ -54,16 +47,11 @@ class CustomMovieDetailView: UIView {
     }
     
     func configureHierarchy(){
-        addSubview(backImageView)
         addSubview(starRatingView)
         addSubview(titleLabel)
     }
     
     func configureLayout(){
-        backImageView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
-        
         starRatingView.snp.makeConstraints { make in
             make.bottom.equalTo(titleLabel.snp.top).offset(-12)
             make.horizontalEdges.equalTo(titleLabel)
@@ -78,14 +66,12 @@ class CustomMovieDetailView: UIView {
     func configureUI(){
         
         frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 0.7)
-        
-        
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        if let sublayers = backImageView.layer.sublayers {
+        if let sublayers = layer.sublayers {
             for sublayer in sublayers {
                 if sublayer is CAGradientLayer {
                     sublayer.removeFromSuperlayer()
@@ -94,21 +80,10 @@ class CustomMovieDetailView: UIView {
         }
         
         let gradientLayer = CAGradientLayer()
-        
-        print(backImageView.frame)
-        gradientLayer.frame = backImageView.frame
+        gradientLayer.frame = frame
         gradientLayer.colors = [UIColor.black.withAlphaComponent(0.2).cgColor, UIColor.black.cgColor]
         gradientLayer.locations = [0.6, 0.9]
         
-        backImageView.layer.insertSublayer(gradientLayer, at: 0)
-    }
-    
-    func loadImage(data: Movie?){
-        guard let data = data, let url = URL(string: MediaAPI.imageURL(imagePath: data.backdrop_path).url) else { return }
-        
-        
-        backImageView.kf.setImage(with: url)
-        titleLabel.text = "\(data.original_title)\n\(data.extractedYear)"
-        starRatingView.rating = data.vote_average / 2
+        layer.insertSublayer(gradientLayer, at: 0)
     }
 }
