@@ -13,6 +13,7 @@ class MainTabViewController: UITabBarController {
         case hot
         case main
         case signup
+        case nasa
         
         var title: String {
             switch self {
@@ -24,6 +25,8 @@ class MainTabViewController: UITabBarController {
                 return "main"
             case .signup:
                 return "signup"
+            case .nasa:
+                return "nasa"
             }
         }
         
@@ -37,6 +40,8 @@ class MainTabViewController: UITabBarController {
                 return UIImage(systemName: "popcorn")
             case .signup:
                 return UIImage(systemName: "person")
+            case .nasa:
+                return UIImage(systemName: "globe.asia.australia.fill")
             }
         }
         
@@ -50,6 +55,8 @@ class MainTabViewController: UITabBarController {
                 return MediaMainViewController()
             case .signup:
                 return SignUpViewController()
+            case .nasa:
+                return NasaViewController()
             }
         }
     }
