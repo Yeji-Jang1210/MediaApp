@@ -52,14 +52,14 @@ class CastCollectionViewCell: UICollectionViewCell, Identifier {
     }
     
     //MARK: - configure function
-    func configureHierarchy(){
+    private func configureHierarchy(){
         contentView.addSubview(backView)
         backView.addSubview(actorImageView)
         backView.addSubview(actorNameLabel)
         backView.addSubview(characterNameLabel)
     }
     
-    func configureLayout(){
+    private func configureLayout(){
         
         backView.snp.makeConstraints { make in
             make.edges.equalToSuperview().inset(10)
@@ -81,7 +81,7 @@ class CastCollectionViewCell: UICollectionViewCell, Identifier {
         }
     }
     
-    func fetchData(_ cast: Cast){
+    public func fetchData(_ cast: Cast){
         if let path = cast.profile_path, let url = URL(string: MediaAPI.imageURL(imagePath: path).url) {
             actorImageView.kf.setImage(with: url)
         }

@@ -25,7 +25,7 @@ enum MovieDetailSection: Int, CaseIterable {
     }
 }
 
-class MovieDetailViewController: BaseVC {
+final class MovieDetailViewController: BaseVC {
     
     //MARK: - object
     let tableView: UITableView = {
@@ -130,11 +130,11 @@ class MovieDetailViewController: BaseVC {
         dismissButton.addTarget(self, action: #selector(dismissButtonTapped), for: .touchUpInside)
     }
     
-    func configureNavigation() {
+    private func configureNavigation() {
         navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
-    func configureTableView(){
+    private func configureTableView(){
         tableView.separatorStyle = .none
         tableView.rowHeight = UITableView.automaticDimension
         tableView.contentInsetAdjustmentBehavior = .never
@@ -146,7 +146,7 @@ class MovieDetailViewController: BaseVC {
         tableView.register(ExpandTextViewCell.self, forCellReuseIdentifier: ExpandTextViewCell.identifier)
     }
     
-    func configureHeaderCollectionView(){
+    private func configureHeaderCollectionView(){
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(MovieDetailViewPosterCollectionViewCell.self, forCellWithReuseIdentifier: MovieDetailViewPosterCollectionViewCell.identifier)
@@ -162,7 +162,7 @@ class MovieDetailViewController: BaseVC {
         navigationController?.popViewController(animated: true)
     }
     
-    func fetchMoviePosters(){
+    private func fetchMoviePosters(){
         guard let id = movie?.id else { return }
         
         DispatchQueue.global().async {

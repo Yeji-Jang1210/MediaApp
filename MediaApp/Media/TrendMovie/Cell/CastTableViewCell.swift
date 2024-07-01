@@ -43,17 +43,17 @@ class CastTableViewCell: UITableViewCell, Identifier {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureHierarchy(){
+    private func configureHierarchy(){
         contentView.addSubview(collectionView)
     }
     
-    func configureLayout(){
+    private func configureLayout(){
         collectionView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
     }
     
-    func configureUI(){
+    private func configureUI(){
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(CastCollectionViewCell.self, forCellWithReuseIdentifier: CastCollectionViewCell.identifier)

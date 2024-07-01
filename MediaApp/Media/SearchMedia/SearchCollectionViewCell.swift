@@ -72,14 +72,13 @@ class SearchCollectionViewCell: UICollectionViewCell, Identifier {
         
         configureHierarchy()
         configureLayout()
-        configureUI()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureHierarchy(){
+    private func configureHierarchy(){
         contentView.addSubview(backView)
         
         backView.addSubview(imageView)
@@ -89,7 +88,7 @@ class SearchCollectionViewCell: UICollectionViewCell, Identifier {
         backView.addSubview(adultImageView)
     }
     
-    func configureLayout(){
+    private func configureLayout(){
         backView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
@@ -122,11 +121,7 @@ class SearchCollectionViewCell: UICollectionViewCell, Identifier {
         }
     }
     
-    func configureUI(){
-        
-    }
-    
-    func fetchData(data: TVProgram){
+    public func fetchData(data: TVProgram){
         if let path = data.poster_path, let url = URL(string: MediaAPI.imageURL(imagePath: path).url) {
             imageView.kf.setImage(with: url)
         }

@@ -118,7 +118,6 @@ class MediaInfoTableViewCell: UITableViewCell, Identifier {
         self.contentView.backgroundColor = .black
         configureHierarchy()
         configureLayout()
-        configureUI()
     }
     
     required init?(coder: NSCoder) {
@@ -126,7 +125,7 @@ class MediaInfoTableViewCell: UITableViewCell, Identifier {
     }
     
     //MARK: - configure function
-    func configureHierarchy(){
+    private func configureHierarchy(){
         contentView.addSubview(dateLabel)
         contentView.addSubview(categoryLabel)
         contentView.addSubview(mediaInfoView)
@@ -144,7 +143,7 @@ class MediaInfoTableViewCell: UITableViewCell, Identifier {
         stackView.addArrangedSubview(gradeLabel)
     }
     
-    func configureLayout(){
+    private func configureLayout(){
         dateLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(20)
             make.height.equalTo(16)
@@ -208,10 +207,6 @@ class MediaInfoTableViewCell: UITableViewCell, Identifier {
             make.size.equalTo(20)
             make.centerY.equalTo(moreInfoLabel.snp.centerY)
         }
-    }
-    
-    func configureUI(){
-        
     }
 
 //MARK: - function

@@ -28,7 +28,7 @@ enum NetworkingError: Error {
 class APIManager {
     private init(){}
     
-    static func callAPI<T: Codable>(api: MediaAPI, type: T.Type, completion: @escaping (NetworkResult<T>) -> Void){
+    static func callAPI<T: Decodable>(api: MediaAPI, type: T.Type, completion: @escaping (NetworkResult<T>) -> Void){
         AF.request(api.url,
                    method: api.method,
                    parameters: api.parameters,

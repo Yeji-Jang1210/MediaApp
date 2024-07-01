@@ -74,13 +74,13 @@ class TrendMovieInfoViewController: BaseVC {
         scrollTopButton.addTarget(self, action: #selector(scrollTopButtonTapped), for: .touchUpInside)
     }
     
-    func configureNavigation() {
+    private func configureNavigation() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal"), style: .done, target: self, action: #selector(searchButtonClicked))
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .done, target: self, action: #selector(menuButtonClicked))
         navigationController?.navigationBar.tintColor = .white
     }
     
-    func configureTableView(){
+    private func configureTableView(){
         tableView.backgroundColor = .black
         tableView.separatorStyle = .none
         
@@ -108,7 +108,7 @@ class TrendMovieInfoViewController: BaseVC {
         
     }
     
-    func callTrendingMovieAPIResponse(completion: @escaping ([Movie]?) -> Void){
+    private func callTrendingMovieAPIResponse(completion: @escaping ([Movie]?) -> Void){
         
         APIManager.callAPI(api: MediaAPI.trendURL, type: TrendMovie.self) { result in
             switch result {

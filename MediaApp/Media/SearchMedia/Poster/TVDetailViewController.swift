@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import WebKit
 import SnapKit
 
 class TVDetailViewController: BaseVC {
@@ -48,7 +49,7 @@ class TVDetailViewController: BaseVC {
     }
     
     //MARK: - object
-    let tableView = UITableView()
+    let tableView = UITableView(frame: .zero, style: .grouped)
     
     let programTitleLabel: UILabel = {
         let object = UILabel()
@@ -57,10 +58,16 @@ class TVDetailViewController: BaseVC {
         return object
     }()
     
+    let webView: WKWebView = {
+        let object = WKWebView()
+        return object
+    }()
+    
     //MARK: - properties
     var programTitle: String = ""
     var id: Int = 0
-    var paths: [[String]] = Array(repeating: [], count: CollectionViewList.allCases.count)
+    var programs: [[TVProgram]] = Array(repeating: [], count: 2)
+    var posters: [String] = []
     
     //MARK: - life cycle
     init(id: Int, title: String){
@@ -92,7 +99,7 @@ class TVDetailViewController: BaseVC {
         programTitleLabel.snp.makeConstraints { make in
             make.top.leading.equalTo(view.safeAreaLayoutGuide).inset(12)
         }
-        
+
         tableView.snp.makeConstraints { make in
             make.top.equalTo(programTitleLabel.snp.bottom).offset(12)
             make.horizontalEdges.bottom.equalTo(view.safeAreaLayoutGuide)
@@ -116,6 +123,7 @@ class TVDetailViewController: BaseVC {
     private func configureTableView(){
         tableView.backgroundColor = .clear
         tableView.allowsSelection = false
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(PosterTableViewCell.self, forCellReuseIdentifier: PosterTableViewCell.identifier)
@@ -131,10 +139,23 @@ class TVDetailViewController: BaseVC {
     func menuButtonTapped(){
     }
     
-    func fetchData(){
+    private func fetchData(){
         
         let group = DispatchGroup()
-    
+        
+        group.enter()
+        DispatchQueue.global().async {
+            self.callAPIForVideoKey(id: self.id) { key in
+                guard let key = key else { return }
+                guard let url = URL(string: MediaAPI.youtubeURL(key: key).url) else { return }
+                
+                DispatchQueue.main.async {
+                    self.webView.load(URLRequest(url: url))
+                }
+                group.leave()
+            }
+        }
+        
         for (index, item) in CollectionViewList.allCases.enumerated() {
             group.enter()
             switch item {
@@ -143,7 +164,7 @@ class TVDetailViewController: BaseVC {
                     APIManager.callAPI(api: item.getAPIType(id: self.id), type: SearchResult.self) { result in
                         switch result {
                         case .success(let data):
-                            self.paths[index] = data.results.filter{$0.poster_path != nil}.map{ MediaAPI.imageURL(imagePath: $0.poster_path!).url }
+                            self.programs[index] = data.results
                                 group.leave()
                         case .error(let error):
                             print(error)
@@ -155,7 +176,7 @@ class TVDetailViewController: BaseVC {
                     APIManager.callAPI(api: item.getAPIType(id: self.id), type: MediaPosters.self) { result in
                         switch result {
                         case .success(let data):
-                                self.paths[index] = data.backdrops.map { MediaAPI.imageURL(imagePath: $0.file_path).url }
+                                self.posters = data.backdrops.map { MediaAPI.imageURL(imagePath: $0.file_path).url }
                                 group.leave()
                         case .error(let error):
                             print(error)
@@ -169,9 +190,28 @@ class TVDetailViewController: BaseVC {
             self.tableView.reloadData()
         }
     }
+    
+    private func callAPIForVideoKey(id: Int, completion: @escaping (String?) -> Void){
+        APIManager.callAPI(api: .getVideoKeyURL(id: id), type: Videos.self) { networkResult in
+            switch networkResult {
+            case .success(let data):
+                completion(data.results.first?.key)
+            case .error(let error):
+                print(error)
+            }
+        }
+    }
 }
 
 extension TVDetailViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return webView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 200
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.row {
         case 2:
@@ -182,7 +222,7 @@ extension TVDetailViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return paths.count
+        return CollectionViewList.allCases.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -201,13 +241,25 @@ extension TVDetailViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension TVDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return paths[collectionView.tag].count
+        switch collectionView.tag {
+        case 0, 1:
+            return programs[collectionView.tag].count
+        default:
+            return posters.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PosterCollectionViewCell.identifier, for: indexPath) as! PosterCollectionViewCell
         
-        cell.setImage(path: paths[collectionView.tag][indexPath.row])
+        switch collectionView.tag {
+        case 0, 1:
+            if let path = programs[collectionView.tag][indexPath.row].poster_path {
+                cell.setImage(path: MediaAPI.imageURL(imagePath: path).url)
+            }
+        default:
+            cell.setImage(path: posters[indexPath.row])
+        }
         
         return cell
     }
@@ -215,5 +267,17 @@ extension TVDetailViewController: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = collectionView.frame.height * 0.7
         return CGSize(width: width, height: collectionView.frame.height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView.tag != 2 {
+            callAPIForVideoKey(id: programs[collectionView.tag][indexPath.row].id) { key in
+                print("callAPIForVideoKey:\(self.programs[collectionView.tag][indexPath.row].id)")
+                if let key = key {
+                    let vc = YoutubeWebViewController(url: key)
+                    self.present(vc, animated: true)
+                }
+            }
+        }
     }
 }

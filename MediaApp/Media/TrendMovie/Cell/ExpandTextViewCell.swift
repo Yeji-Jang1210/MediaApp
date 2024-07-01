@@ -42,7 +42,6 @@ class ExpandTextViewCell: UITableViewCell {
         
         configureHierarchy()
         configureLayout()
-        configureUI()
     }
     
     required init?(coder: NSCoder) {
@@ -50,14 +49,14 @@ class ExpandTextViewCell: UITableViewCell {
     }
     
     //MARK: - configure function
-    func configureHierarchy(){
+    private func configureHierarchy(){
         contentView.addSubview(backView)
         
         backView.addSubview(overViewLabel)
         backView.addSubview(button)
     }
     
-    func configureLayout(){
+    private func configureLayout(){
         backView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
@@ -73,9 +72,6 @@ class ExpandTextViewCell: UITableViewCell {
             make.bottom.equalToSuperview().offset(-12)
             make.height.equalTo(24)
         }
-    }
-    
-    func configureUI(){
     }
     
     //MARK: - function

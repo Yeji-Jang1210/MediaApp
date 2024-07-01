@@ -46,12 +46,12 @@ class MovieInfoView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureHierarchy(){
+    private func configureHierarchy(){
         addSubview(starRatingView)
         addSubview(titleLabel)
     }
     
-    func configureLayout(){
+    private func configureLayout(){
         starRatingView.snp.makeConstraints { make in
             make.bottom.equalTo(titleLabel.snp.top).offset(-12)
             make.horizontalEdges.equalTo(titleLabel)
@@ -63,7 +63,7 @@ class MovieInfoView: UIView {
         }
     }
     
-    func configureUI(){
+    private func configureUI(){
         
         frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 0.7)
     }

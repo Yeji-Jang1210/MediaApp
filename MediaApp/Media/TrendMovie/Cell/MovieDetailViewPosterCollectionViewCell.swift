@@ -30,17 +30,17 @@ class MovieDetailViewPosterCollectionViewCell: UICollectionViewCell, Identifier 
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureHierarchy(){
+    private func configureHierarchy(){
         contentView.addSubview(posterImageView)
     }
     
-    func configureLayout(){
+    private func configureLayout(){
         posterImageView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
     }
     
-    func loadPosterImage(path: String?){
+    public func loadPosterImage(path: String?){
         guard let path = path, let url = URL(string: MediaAPI.imageURL(imagePath: path).url) else { return }
         
         print(url)
