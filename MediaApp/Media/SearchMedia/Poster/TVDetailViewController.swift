@@ -68,6 +68,7 @@ class TVDetailViewController: BaseVC {
     var id: Int = 0
     var programs: [[TVProgram]] = Array(repeating: [], count: 2)
     var posters: [String] = []
+    var isVideoLoadedComplete: Bool = false
     
     //MARK: - life cycle
     init(id: Int, title: String){
@@ -146,13 +147,19 @@ class TVDetailViewController: BaseVC {
         group.enter()
         DispatchQueue.global().async {
             self.callAPIForVideoKey(id: self.id) { key in
-                guard let key = key else { return }
-                guard let url = URL(string: MediaAPI.youtubeURL(key: key).url) else { return }
+                self.isVideoLoadedComplete = key != nil ? true : false
                 
-                DispatchQueue.main.async {
-                    self.webView.load(URLRequest(url: url))
+                if let key = key {
+                    if let url = URL(string: MediaAPI.youtubeURL(key: key).url){
+                        DispatchQueue.main.async {
+                            self.webView.load(URLRequest(url: url))
+                            group.leave()
+                        }
+                    }
+                } else {
+                    group.leave()
                 }
-                group.leave()
+                
             }
         }
         
@@ -205,11 +212,11 @@ class TVDetailViewController: BaseVC {
 
 extension TVDetailViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return webView
+        return isVideoLoadedComplete ? webView : nil
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 200
+        return isVideoLoadedComplete ? 200 : 0
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -267,17 +274,5 @@ extension TVDetailViewController: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = collectionView.frame.height * 0.7
         return CGSize(width: width, height: collectionView.frame.height)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if collectionView.tag != 2 {
-            callAPIForVideoKey(id: programs[collectionView.tag][indexPath.row].id) { key in
-                print("callAPIForVideoKey:\(self.programs[collectionView.tag][indexPath.row].id)")
-                if let key = key {
-                    let vc = YoutubeWebViewController(url: key)
-                    self.present(vc, animated: true)
-                }
-            }
-        }
     }
 }
